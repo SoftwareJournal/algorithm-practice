@@ -67,7 +67,6 @@ class OptimizeSolution9 {
                 arr[i] = curHR;
             }
         }
-
         return arr;
     }
 }
