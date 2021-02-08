@@ -1,3 +1,4 @@
+package Arrays;
 
 /**
  * PROMPT:
@@ -36,7 +37,6 @@
  * the array and you will be able to come up with a straightforward 
  * solution. 
  */
-
 class ValidMountainArray {
     public boolean validMountainArray(int[] arr) {
         int k = arr.length;

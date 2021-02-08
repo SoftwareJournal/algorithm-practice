@@ -1,3 +1,5 @@
+package Arrays;
+
 /**
  * PROMPT:
  * SQUARES OF A SORTED ARRAY

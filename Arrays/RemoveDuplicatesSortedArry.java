@@ -1,3 +1,5 @@
+package Arrays;
+
 /**
  * PROMPT: REMOVE DUPLICATES FROM SORTED ARRAY 
  * Given a sorted array nums, remove the duplicates in-place

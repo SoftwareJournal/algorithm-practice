@@ -1,3 +1,4 @@
+package Arrays;
 
 /**
  * PROMPT:
@@ -17,8 +18,8 @@
  * Output: [4,9,9,49,121]
  * 
  * Constraints:
- * 1 <= nums.length <= 104
- * -104 <= nums[i] <= 104
+ * 1 <= nums.length <= 10^4
+ * -104 <= nums[i] <= 10^4
  * nums is sorted in non-decreasing order.
  * 
  * Follow up: Squaring each element and sorting the new
@@ -29,38 +30,38 @@ import java.util.Arrays;
 
 class Solution3 {
     public int[] sortedSquares(int[] nums) {
-        int [] squares = new int[nums.length];
+        int[] squares = new int[nums.length];
         int index = 0;
-        for(int num: nums){
-            squares[index] = num*num;
+        for (int num : nums) {
+            squares[index] = num * num;
             index++;
-        }        
-        
+        }
+
         Arrays.sort(squares);
         return squares;
     }
 }
 
-class OptimizeSolution3{
+class OptimizeSolution3 {
     public int[] sortedSquares(int[] nums) {
-        int k =  nums.length - 1;
+        int k = nums.length - 1;
         int lo = 0;
         int hi = k;
-        int [] squares = new int[nums.length];
-        
-        //dual-pivot to sort array in ascending order
-        for(int j = k;j>=0;j--){
-            int los = nums[lo]*nums[lo];
-            int his = nums[hi]*nums[hi];
-            if(los<his){
-                squares[j]=his;
+        int[] squares = new int[nums.length];
+
+        // dual-pivot to sort array in ascending order
+        for (int j = k; j >= 0; j--) {
+            int los = nums[lo] * nums[lo];
+            int his = nums[hi] * nums[hi];
+            if (los < his) {
+                squares[j] = his;
                 hi--;
-            }else{
-                squares[j]=los;
+            } else {
+                squares[j] = los;
                 lo++;
             }
-        }        
-      
+        }
+
         return squares;
     }
 
