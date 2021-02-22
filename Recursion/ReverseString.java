@@ -27,7 +27,7 @@ package Recursion;
  * based on using the opposite directional 
  * two-pointer approach!
  */
-public class ReverseString {
+class ReverseString {
     public void reverseString(char[] s) {
         s = helper(0,s);
     }
@@ -45,5 +45,25 @@ public class ReverseString {
         input[index] = back;
         
         return helper(index+1,input);
+    }
+}
+
+class BetterSolution{
+    public void reverseString(char[] s) {
+        helper(0,s);
+    }
+
+    public void helper(int index, char[] s){
+        int l = s.length-1;
+        // base case
+        if(index == l - index || index > l - index){
+           return; 
+        }
+        
+        char temp = s[l - index];
+        s[l - index] = s[index];
+        s[index] = temp;
+        
+        helper(index+1,s);
     }
 }
