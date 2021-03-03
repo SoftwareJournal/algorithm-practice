@@ -39,7 +39,7 @@ class ListNode {
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 }
  
-public class SwapNodesInPairs {
+class SwapNodesInPairs {
     public ListNode swapPairs(ListNode head) {
         swap(head);
         return head;

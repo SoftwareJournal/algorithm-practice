@@ -1,3 +1,4 @@
+package Recursion;
 /**
  * PROMPT:
  * REVERSE LINKED LIST
@@ -32,6 +33,7 @@
  * or recursively. Could you implement both?
  */
 import java.util.HashMap;
+
  // Definition for singly-linked list.
  class ListNode {
       int val;
@@ -40,7 +42,7 @@ import java.util.HashMap;
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
   }
- 
+
 class Solution {
     public ListNode reverseList(ListNode head) {
         head = reverse2(head);
