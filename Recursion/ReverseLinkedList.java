@@ -31,7 +31,7 @@
  * Follow up: A linked list can be reversed either iteratively
  * or recursively. Could you implement both?
  */
-
+import java.util.HashMap;
  // Definition for singly-linked list.
  class ListNode {
       int val;
