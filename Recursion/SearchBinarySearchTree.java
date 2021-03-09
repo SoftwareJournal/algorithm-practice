@@ -41,11 +41,11 @@ class TreeNode {
 //Messy first attempt, but it works!!
 public class SearchBinarySearchTree {
     public TreeNode searchBST(TreeNode root, int val) {
-        TreeNode node = search(root,val);
+        TreeNode node = search2(root,val);
         return node;
     }
     
-    //recursive
+    //recursively
     private TreeNode search(TreeNode root, int val){
         if(root!=null && root.val == val)
             return root;
@@ -65,6 +65,26 @@ public class SearchBinarySearchTree {
             node = search(root.left,val);    
         }
         if(root.right!=null && node == null){
+            node = search(root.right,val);
+        }
+        
+        return node;
+    }
+
+    //recursively and cleaner
+    private TreeNode search2(TreeNode root, int val){
+        if(root!=null && root.val == val)
+            return root;
+        
+        if(root==null){
+            return null;
+        }
+        
+        TreeNode node = null;
+        
+        if(root.left!=null && root.val>val){
+            node = search(root.left,val);    
+        }else{
             node = search(root.right,val);
         }
         
