@@ -53,6 +53,7 @@ package Arrays;
 
 import java.util.HashMap;
 
+// Time Complexity: O(n), Space Complexity: O(n)
 class RemoveDuplicatesSortedArry {
     public int removeDuplicates(int[] nums) {
         int index = 0;
