@@ -91,9 +91,9 @@ class OptimizeSolution14 {
         TreeNode node = null;
         
         if(root.left!=null && root.val>val){
-            node = search(root.left,val);    
+            node = search2(root.left,val);    
         }else{
-            node = search(root.right,val);
+            node = search2(root.right,val);
         }
         
         return node;
