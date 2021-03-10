@@ -41,7 +41,7 @@ class TreeNode {
 //Messy first attempt, but it works!!
 public class SearchBinarySearchTree {
     public TreeNode searchBST(TreeNode root, int val) {
-        TreeNode node = search2(root,val);
+        TreeNode node = search(root,val);
         return node;
     }
     
@@ -68,6 +68,14 @@ public class SearchBinarySearchTree {
             node = search(root.right,val);
         }
         
+        return node;
+    }
+}
+
+//Cleaner solution
+class OptimizeSolution14 {
+    public TreeNode searchBST(TreeNode root, int val) {
+        TreeNode node = search2(root,val);
         return node;
     }
 
