@@ -56,3 +56,25 @@ class SwapNodesInPairs {
         swap(head.next.next);
     }
 }
+
+class FollowUp {
+    public ListNode swapPairs(ListNode head) {
+        ListNode node = swap(head);
+        return node;
+    }
+    
+    public ListNode swap(ListNode head){
+        if(head == null){
+            return null;   
+        }
+        //base case
+        if(head.next == null){
+            return head;
+        }
+        
+        ListNode node = head.next;
+        head.next = swap(head.next.next);
+        node.next = head;
+        return node;
+    }
+}
