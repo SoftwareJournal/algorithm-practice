@@ -1,12 +1,6 @@
 package Queue;
 /**
- * 51 / 54 test cases passed.
- * Need to solve for this test case:
- * ["MyCircularQueue","enQueue","enQueue","deQueue","enQueue","deQueue","enQueue","deQueue","enQueue","deQueue", "Front"]
-[[2],[1],[2],[],[3],[],[3],[],[3],[],[]]
-
-Output: [null,true,true,true,false,true,true,true,true,true,-1]
-Expec.: [null,true,true,true,true,true,true,true,true,true,3]
+ * 54 / 54 test cases passed.
  */
 class MyCircularQueue {
     
@@ -18,9 +12,9 @@ class MyCircularQueue {
     /** Initialize your data structure here. Set the size of the queue to be k. */
     public MyCircularQueue(int k) {
         queue = new int[k];
-        head = -1;
-        tail = -1;
-        size = k;
+        head = -1; //initialize to -1 to see if queue is empty
+        tail = -1; //initialize to -1 to see if queue is empty
+        size = k; //the size of the queue
     }
     
     /** Insert an element into the circular queue. Return true if the operation is successful. */
@@ -35,24 +29,36 @@ class MyCircularQueue {
             queue[tail] = value;
             return true;
         }
-        
+
+        //check if head less than or equal to tail at the start of queue
+        //and tail is less than or equal to the end of the queue 
         if(head<=tail && tail+1 <= size-1){
             tail = tail+1;
             queue[tail] = value;
             return true;
-        }else if(head < tail && tail+1 > size-1){
+        }
+        //check if the tail is greater than head but at the end of the queue
+        else if(head <= tail && tail+1 > size-1){
+            //check if the head is still at the beginning
             if(head == 0){
                 return false;
-            }else{
+            }
+            //if not place tail at the beginning of the queue and add value
+            else{
                 tail = 0;
                 queue[tail] = value;
                 return true;        
             }
-        }else if(tail < head && isFull() == false){
+        }
+        //check if the tail is less than tail 
+        //but check if it is full when another value is added to the queue
+        else if(tail < head && isFull() == false){
             tail = tail+1;
             queue[tail] = value;
             return true;
-        }else{
+        }
+        //otherwise value wasn't added successfully to the queue
+        else{
             return false;
         }
         
@@ -69,14 +75,19 @@ class MyCircularQueue {
             tail = -1;
             return true;
         }
-        
+        //check when head incremented is less than or equal to tail
         if(head+1 <= tail){
             head = head+1;
             return true;
-        }else if(tail<head && head+1 > size-1){
+        }
+        //check if head is head greater than tail and if head increment is 
+        //greater than queue max index
+        else if(tail<head && head+1 > size-1){
             head = 0;
             return true;    
-        }else{
+        }
+        //else increment head otherwise
+        else{
             head = head+1;
             return true;    
         }
@@ -108,6 +119,9 @@ class MyCircularQueue {
     
     /** Checks whether the circular queue is full or not. */
     public boolean isFull() {
+        //check when tail increment isn't greater than queue max index
+        //if true, check if head isn't at the beginning of the queue
+        //if false, check if tail increment is equal to head index position 
         return (tail+1 > size-1) ? head == 0 : tail+1 == head;
     }
 }
