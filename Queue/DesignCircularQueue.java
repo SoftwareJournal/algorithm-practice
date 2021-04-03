@@ -1,110 +1,114 @@
 package Queue;
 /**
- * 46 / 54 test cases passed.
+ * 51 / 54 test cases passed.
  * Need to solve for this test case:
- * ["MyCircularQueue","enQueue","Front","isFull","enQueue","enQueue","enQueue","deQueue","enQueue","enQueue","isEmpty","Rear"]
-[[4],[3],[],[],[7],[2],[5],[],[4],[2],[],[]]
+ * ["MyCircularQueue","enQueue","enQueue","deQueue","enQueue","deQueue","enQueue","deQueue","enQueue","deQueue", "Front"]
+[[2],[1],[2],[],[3],[],[3],[],[3],[],[]]
 
-Output: [null,true,3,false,true,true,true,true,true,true,false,2]
-Expec.: [null,true,3,false,true,true,true,true,true,false,false,4]
+Output: [null,true,true,true,false,true,true,true,true,true,-1]
+Expec.: [null,true,true,true,true,true,true,true,true,true,3]
  */
 class MyCircularQueue {
-    int[] queue;
-    int p_start;
-    int p_end;
-    int len;
-    /*initilize the circular queue*/
+    
+    private int[] queue;
+    private int head;
+    private int tail;
+    private int size;
+
+    /** Initialize your data structure here. Set the size of the queue to be k. */
     public MyCircularQueue(int k) {
         queue = new int[k];
-        p_start = -1;
-        p_end = -1;
-        len = k;
-    }
-    //add at the end of the queue
-    public boolean enQueue(int value) {
-        
-        if(isEmpty()){
-            p_start = 0;
-            p_end = 0;
-            queue[p_end] = value;
-            return true;
-        }
-        //before the end of the array max index
-        else if(!isFull() && p_end+1 <= len-1){
-            p_end++;
-            queue[p_end] = value;
-            return true;
-        }
-        //pass the end of the array max index
-        else if(!isFull() && p_end+1 > len-1){
-            p_end = 0;
-            queue[p_end] = value;
-            return true;    
-        }
-        
-        return false;
+        head = -1;
+        tail = -1;
+        size = k;
     }
     
-    //take out the first element
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    public boolean enQueue(int value) {
+        if(isFull() == true){
+            return false;
+        }
+        
+        if(isEmpty() == true){
+            head = 0;
+            tail = 0;
+            queue[tail] = value;
+            return true;
+        }
+        
+        if(head<=tail && tail+1 <= size-1){
+            tail = tail+1;
+            queue[tail] = value;
+            return true;
+        }else if(head < tail && tail+1 > size-1){
+            if(head == 0){
+                return false;
+            }else{
+                tail = 0;
+                queue[tail] = value;
+                return true;        
+            }
+        }else if(tail < head && isFull() == false){
+            tail = tail+1;
+            queue[tail] = value;
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
     public boolean deQueue() {
         if(isEmpty() == true){
             return false;
         }
         
-        if(p_start == 0 && p_end == 0 || p_start == p_end){
-            p_end = -1;
-            p_start = -1;        
-            return true;
-        }
-        //before the end of the array max index
-        else if(isEmpty() == false && p_start+1 <= p_end){
-            p_start++;
-            return true;
-        }
-        // pass the end of the array max index
-        else if(isEmpty() == false && p_start+1 > len-1){
-            p_start = 0;
+        if(tail == head){
+            head = -1;
+            tail = -1;
             return true;
         }
         
-        return false;
+        if(head+1 <= tail){
+            head = head+1;
+            return true;
+        }else if(tail<head && head+1 > size-1){
+            head = 0;
+            return true;    
+        }else{
+            head = head+1;
+            return true;    
+        }
+        
     }
     
-    //get the front of the queue;
+    /** Get the front item from the queue. */
     public int Front() {
-        if(isEmpty()){
+        if(isEmpty() == true){
             return -1;
-        }
-        return queue[p_start];
-    }
-    //get the rear of the queue;
-    public int Rear() {
-        if(isEmpty()){
-            return -1;
-        }
-        return queue[p_end];
-    }
-    
-    //is the queue empty
-    public boolean isEmpty() {
-        if(p_start == -1 || p_end == -1){
-            return true;
-        }
-        return false;
-    }
-    
-    //is the queue full
-    public boolean isFull() {
-        // if p_end after p_start
-        if(p_end - p_start + 2 > len && p_start < p_end){
-            return true;
-        }
-        // if p_end before p_start
-        else if(len - 1 - p_start + p_end + 2 > len && p_end < p_start){
-            return true;
         }
         
-        return false;
+        return queue[head];
+    }
+    
+    /** Get the last item from the queue. */
+    public int Rear() {
+        if(isEmpty() == true){
+            return -1;
+        }
+        
+        return queue[tail];
+    }
+    
+    /** Checks whether the circular queue is empty or not. */
+    public boolean isEmpty() {
+        return head == -1;
+    }
+    
+    /** Checks whether the circular queue is full or not. */
+    public boolean isFull() {
+        return (tail+1 > size-1) ? head == 0 : tail+1 == head;
     }
 }
 
