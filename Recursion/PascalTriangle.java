@@ -60,14 +60,15 @@ class PascalTriangle {
 // Second attempted accepted using memoization technique to reduce
 // duplicate calculations
 class OptimizeSolution20 {
-    List<Integer> arr = new ArrayList<Integer>();
+    List<Integer> arr;
+    int[][]memo;
     public List<Integer> getRow(int rowIndex) {
         //first param rowIndex, second param length of array
         int len = rowIndex+1;
         return returnArray(rowIndex,len);
     }
     
-    private int returnRowColValue(int i, int j, int[][]memo){
+    private int returnRow(int i, int j, int[][]memo){
         if(j==0 || j==i) {
             return 1;
         }
@@ -76,14 +77,15 @@ class OptimizeSolution20 {
             return memo[i][j];
         }
         
-        memo[i][j] = returnRowColValue(i-1,j-1,memo) + returnRowColValue(i-1,j,memo);
+        memo[i][j] = returnRow(i-1,j-1,memo) + returnRow(i-1,j,memo);
         return memo[i][j];
     }
     
     private List<Integer> returnArray(int row, int len){
-        int[][]memo = new int[row+1][len];
+        arr = new ArrayList<Integer>();
+        memo = new int[row+1][len];
         for(int j = 0;j<len;j++){
-            arr.add(returnRowColValue(row,j,memo));     
+            arr.add(returnRow(row,j,memo));     
         }
         return arr;
     }
