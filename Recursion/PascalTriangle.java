@@ -68,7 +68,7 @@ class OptimizeSolution20 {
         return returnArray(rowIndex,len);
     }
     
-    private int returnRow(int i, int j, int[][]memo){
+    private int returnRowColValue(int i, int j, int[][]memo){
         if(j==0 || j==i) {
             return 1;
         }
@@ -77,7 +77,7 @@ class OptimizeSolution20 {
             return memo[i][j];
         }
         
-        memo[i][j] = returnRow(i-1,j-1,memo) + returnRow(i-1,j,memo);
+        memo[i][j] = returnRowColValue(i-1,j-1,memo) + returnRowColValue(i-1,j,memo);
         return memo[i][j];
     }
     
@@ -85,7 +85,7 @@ class OptimizeSolution20 {
         arr = new ArrayList<Integer>();
         memo = new int[row+1][len];
         for(int j = 0;j<len;j++){
-            arr.add(returnRow(row,j,memo));     
+            arr.add(returnRowColValue(row,j,memo));     
         }
         return arr;
     }
