@@ -90,3 +90,27 @@ class OptimizeSolution20 {
         return arr;
     }
 }
+
+// Iterative Approach to the Pascal's Triangle II
+class OptimizeSolution21 {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> array = new ArrayList<>();
+        int[][]memo = new int[rowIndex+1][rowIndex+1];
+        int row = 0;
+        while(row<=rowIndex){
+            for(int col = 0; col <= row; col++){
+                if(col == 0 || row == col){
+                    memo[row][col] = 1;
+                }else{
+                    memo[row][col] = memo[row-1][col-1] + memo[row-1][col];        
+                }
+                
+                if(row == rowIndex){
+                    array.add(memo[rowIndex][col]);
+                }
+            }
+            row++;
+        }   
+        return array;
+    }
+}
