@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  * PROMPT:
- * MAXIMUM NUMBER OF WORDS FOUND IN SENTENCES
+ * SHUFFLE STRING
  * 
  * You are given a string s and an integer array indices of the same length. The string s will be shuffled such that the character at the ith position moves to indices[i] in the shuffled string.
  * 
@@ -39,19 +39,19 @@ class ShuffleString {
         HashMap<Integer, String> stringIndexMap = new HashMap<Integer, String>();
         for(int i = 0;i < len; i++){
             //Converting char to String object
-            stringIndexMap.put(indices[i],Character.toString(charArray[i]));
+            stringIndexMap.put(indices[i],String.valueOf(charArray[i]));
         }
         
         //Build a String object with StringBuilder object
-        StringBuilder buildString = new StringBuilder();
+        StringBuilder stringCreation = new StringBuilder();
         
         //Sort the indices with Java built-in function Arrays.sort(int[]); Time complexity is O(n*Log(n))   
         Arrays.sort(indices);
         for(int item : indices){
-            buildString.append(stringIndexMap.get(item));
+            stringCreation.append(stringIndexMap.get(item));
         }
 
         //StringBuilder method to turn StringBuilder object to String
-        return buildString.toString();
+        return stringCreation.toString();
     }
 }
