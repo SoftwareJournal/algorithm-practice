@@ -22,6 +22,8 @@ import java.util.Set;
  * - Only the filled cells need to be validated according to the mentioned rules.
  * 
  */
+//Time complexity: O(n^2) where n is the number of cells in the board.
+//Space complexity: O(n) where n is the number of cells in the board.
 class ValidSudoku {
     public boolean isValidSudoku(char[][] board) {
         int rowLen = board.length;
