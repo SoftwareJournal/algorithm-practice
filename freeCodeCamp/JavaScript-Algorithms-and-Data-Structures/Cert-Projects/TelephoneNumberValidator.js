@@ -11,7 +11,7 @@ function telephoneCheck(str) {
     str = str.replace('(','').replace(')','');
   }
 
-  return /^1{0,1}\s?[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/.test(str);
+  return /^1{0,1}\s?[0-9]{3}[- ]?[0-9]{3}[- ]?[0-9]{4}$/.test(str);
 }
 let number = "1 (555)555-5555";
 let isValidNumber = telephoneCheck(number);
