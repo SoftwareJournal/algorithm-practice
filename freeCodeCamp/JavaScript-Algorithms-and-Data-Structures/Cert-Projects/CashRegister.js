@@ -14,6 +14,18 @@ function checkCashRegister(price, cash, cid) {
       return parseFloat(Number.parseFloat(num).toFixed(decimalPlaces));
     }
     
+    let currencyMapping = {
+      'PENNY':0.01,
+      'NICKEL':0.05,
+      'DIME':0.10,
+      'QUARTER':0.25,
+      'ONE':1,
+      'FIVE':5,
+      'TEN':10,
+      'TWENTY':20,
+      'ONE HUNDRED':100,
+    }
+
     let convertToDecimal = (num)=>{
       return num/100;
     }
@@ -41,29 +53,69 @@ function checkCashRegister(price, cash, cid) {
     console.log(4.25%.25);
     console.log(100%100);
     console.log(parseFloat(1.01%.01).toFixed(0) == '0');
-    console.log(parseFloat(55%.25).toFixed(0) == '0');
+    console.log(parseFloat(.59%.25).toFixed(2));
     console.log(parseFloat(20%10).toFixed(0) == '0');
 
     //Split the number by the decimal
     let changeAmountArr = parseFloat(changeAmount).toFixed(2).split('.');
     changeAmountArr[1] = '.'+changeAmountArr[1];
     console.log(changeAmountArr);
+
+    //Get the change
+    let difference = 0;
     for(let index = cid.length-1;index > 0;index--){
+      //#2,3
       if(parseFloat(changeAmountArr[0]).toFixed(0) === '0' && parseFloat(changeAmountArr[1]).toFixed(0) === '0'){
         change.status = 'OPEN';
         break;
       }
+
       //Big bills first
+      if(cid[index][0] === "ONE HUNDRED"){
+        if(parseFloat(changeAmountArr[0]).toFixed(0) === '0'){
+          continue;
+        }
+      }
+      if(cid[index][0] === "TWENTY"){
+        if(parseFloat(changeAmountArr[0]).toFixed(0) === '0'){
+          continue;
+        }
+      }
+      if(cid[index][0] === "TEN"){
+        if(parseFloat(changeAmountArr[0]).toFixed(0) === '0'){
+          continue;
+        }
+      }
+      if(cid[index][0] === "FIVE"){
+        if(parseFloat(changeAmountArr[0]).toFixed(0) === '0'){
+          continue;
+        }
+      }
+      if(cid[index][0] === "ONE"){
+        if(parseFloat(changeAmountArr[0]).toFixed(0) === '0'){
+          continue;
+        }
+      }
+      //Small coins last
       if(cid[index][0] === "QUARTER"){
-        cid[index][1] = cid[index][1] - changeAmountArr;
+        let multiplyOfRegister = cid[index][1]/currencyMapping[cid[index][0]];
+        let multiplyOfChangeAmout = Number(parseFloat(changeAmountArr[1]/currencyMapping[cid[index][0]]).toFixed(0));
+        let remainderChange = changeAmountArr[1]%currencyMapping[cid[index][0]];
+        console.log('mor:',multiplyOfRegister);
+        console.log('moca:',multiplyOfChangeAmout);
+        console.log('remainderChange:',remainderChange);
+        if(remainderChange > 0){
+          //do nothing
+        }
         change.change.push([cid[index][0],Number(parseFloat(changeAmountArr[1]).toFixed(1))]);
-        console.log(change);
         changeAmountArr[1] = 0;
       } 
     }
 
-    if(changeAmountArr[0] != 0 && changeAmountArr[1] != 0){
+    //#5 Check for scenario when the changeAmount isn't equal to zero 
+    if(parseFloat(changeAmountArr[0]).toFixed(0) != '0' && parseFloat(changeAmountArr[1]).toFixed(0) != '0'){
       change.status = 'INSUFFICIENT_FUNDS';
+      change.change = [];
       return change;
     }
     //console.log(changeAmount);  
