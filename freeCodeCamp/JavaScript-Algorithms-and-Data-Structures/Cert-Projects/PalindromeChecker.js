@@ -1,8 +1,7 @@
 function palindrome(str) {
-    let newStr = str.replace(/\W/g, '');
-    newStr = newStr.replace('_','').replace(' ','').toLowerCase();
-    let revStr = newStr.split('').reverse().join('');
-    return newStr === revStr;
+  let newString = str.replace(/\W/g,'').replace('_','').replace(' ','').toLowerCase();
+  let revString = newString.split('').reverse().join('');
+  return revString === newString;
 }
 
-palindrome("A man, a plan, a canal. Panama");
+palindrome('eye');
